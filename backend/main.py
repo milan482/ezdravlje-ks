@@ -7,17 +7,21 @@ from typing import List, Optional
 from datetime import datetime, date
 from .database import get_db, init_db
 from .database import (
-    User, Profile, Appointment, Prescription, Therapy,
-    LabResult, MedicalRecord, Refund, HealthLog,
-    Reminder, EmergencyContact, HealthcareFacility
+    User, Profile, Appointment, Prescription, Therapy, 
+    LabResult, MedicalRecord, Refund, HealthLog, 
+    Reminder, EmergencyContact, HealthcareFacility, 
+    SessionLocal, Base, engine
 )
 from fastapi.responses import FileResponse
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from .database import get_db, init_db
+from .seed_data import seed_if_empty
 
 # Initialize database on import
 init_db()
+seed_if_empty()
 
 # Initialize FastAPI app
 app = FastAPI(title="eZdravlje KS API", version="1.0.0")
