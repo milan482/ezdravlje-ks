@@ -11,6 +11,9 @@ from .database import (
     LabResult, MedicalRecord, Refund, HealthLog,
     Reminder, EmergencyContact, HealthcareFacility
 )
+from fastapi.responses import FileResponse
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
 
 # Initialize database on import
 init_db()
@@ -28,8 +31,11 @@ app.add_middleware(
 )
 
 # Mount static files for frontend
-app.mount("/static", StaticFiles(directory="../frontend"), name="static")
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
+
+app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 # Pydantic models for request/response
 class UserLogin(BaseModel):
     email: str
@@ -124,9 +130,8 @@ class EmergencyContactCreate(BaseModel):
 # Root endpoint
 @app.get("/")
 def root():
-    return {"message": "eZdravlje KS API - Health System for Sarajevo Canton"}
-
-# ==================== AUTH ENDPOINTS ====================
+    return FileResponse(FRONTEND_DIR / "index.html")
+    # ==================== AUTH ENDPOINTS ====================
 
 @app.post("/api/auth/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
