@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from datetime import datetime, date, timedelta
-from database import (
+from .database import (
     User, Profile, Appointment, Prescription, Therapy, 
     LabResult, MedicalRecord, Refund, HealthLog, 
     Reminder, EmergencyContact, HealthcareFacility, 
@@ -422,4 +422,5 @@ def seed_database():
         db.close()
 
 if __name__ == "__main__":
+    # allow `python seed_data.py` locally
     seed_database()
