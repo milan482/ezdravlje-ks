@@ -7,6 +7,21 @@ from database import (
     SessionLocal, Base, engine
 )
 
+def seed_if_empty():
+    """Seed the database only if it's empty. Safe to call on every startup."""
+    Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    try:
+        if db.query(User).first() is not None:
+            print("Database already has data, skipping seed.")
+            return
+        db.close()
+        seed_database()  # your existing full seed function
+    finally:
+        db.close()
+
+
+
 def seed_database():
     # Create tables
     Base.metadata.create_all(bind=engine)
