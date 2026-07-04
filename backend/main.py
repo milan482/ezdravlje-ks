@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime, date
-from database import get_db, init_db
-from database import (
+from .database import get_db, init_db
+from .database import (
     User, Profile, Appointment, Prescription, Therapy,
     LabResult, MedicalRecord, Refund, HealthLog,
     Reminder, EmergencyContact, HealthcareFacility
