@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#0066CC">
+    <title>eZdravlje KS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Splash Screen -->
+        <div id="splash-screen" class="splash-screen page active">
+            <div class="splash-logo">eZdravlje KS</div>
+            <div class="splash-subtitle">Zdravstveni sistem Kantona Sarajevo</div>
+        </div>
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="page">
+            <div class="header">
+                <h1 class="header-title">Prijava</h1>
+            </div>
+            <div class="main-content">
+                <div class="card text-center mb-4">
+                    <div style="font-size: 48px; color: var(--primary-color); margin-bottom: 16px;">🏥</div>
+                    <h2 style="color: var(--primary-color);">eZdravlje KS</h2>
+                    <p style="color: var(--text-secondary);">Dobrodošli u digitalni zdravstveni sistem</p>
+                </div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="login-email" placeholder="demo@ezdravlje.ba" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Lozinka</label>
+                        <input type="password" class="form-input" id="login-password" placeholder="demo123" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Prijavi se</button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <p style="color: var(--text-secondary);">Nemate nalog?</p>
+                    <button class="btn btn-secondary mt-4" onclick="showPage('register-screen')">Registrujte se</button>
+                </div>
+                
+                <div class="card mt-4">
+                    <h3 class="card-title">Demo podaci</h3>
+                    <p class="card-subtitle">Za demonstraciju koristite:</p>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Email: demo@ezdravlje.ba</p>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Lozinka: demo123</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Screen -->
+        <div id="register-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('login-screen')">←</button>
+                <h1 class="header-title">Registracija</h1>
+            </div>
+            <div class="main-content">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label class="form-label">Ime</label>
+                        <input type="text" class="form-input" id="reg-first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prezime</label>
+                        <input type="text" class="form-input" id="reg-last-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="reg-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">JMBG</label>
+                        <input type="text" class="form-input" id="reg-jmbg" maxlength="13" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Broj kartice osiguranja</label>
+                        <input type="text" class="form-input" id="reg-insurance" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Datum rođenja</label>
+                        <input type="date" class="form-input" id="reg-dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Lozinka</label>
+                        <input type="password" class="form-input" id="reg-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registruj se</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Home Dashboard -->
+        <div id="home-screen" class="page">
+            <div class="header">
+                <h1 class="header-title">Početna</h1>
+                <button class="header-back" onclick="showPage('emergency-screen')">🆘</button>
+            </div>
+            <div class="main-content">
+                <div class="profile-header" id="dashboard-profile">
+                    <div class="profile-avatar" id="dashboard-avatar">A</div>
+                    <div class="profile-info">
+                        <h2 id="dashboard-name">Amela Kovačević</h2>
+                        <p id="dashboard-doctor">Dr. Mirsad Hadžić</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-action" onclick="showPage('appointments-screen')">
+                        <div class="quick-action-icon">📅</div>
+                        <span class="quick-action-label">Termini</span>
+                    </button>
+                    <button class="quick-action" onclick="showPage('prescriptions-screen')">
+                        <div class="quick-action-icon">💊</div>
+                        <span class="quick-action-label">Terapije</span>
+                    </button>
+                    <button class="quick-action" onclick="showPage('lab-results-screen')">
+                        <div class="quick-action-icon">🔬</div>
+                        <span class="quick-action-label">Nalazi</span>
+                    </button>
+                    <button class="quick-action" onclick="showPage('health-tracking-screen')">
+                        <div class="quick-action-icon">❤️</div>
+                        <span class="quick-action-label">Zdravlje</span>
+                    </button>
+                    <button class="quick-action" onclick="showPage('reminders-screen')">
+                        <div class="quick-action-icon">🔔</div>
+                        <span class="quick-action-label">Podsjetnici</span>
+                    </button>
+                    <button class="quick-action" onclick="showPage('facilities-screen')">
+                        <div class="quick-action-icon">🏥</div>
+                        <span class="quick-action-label">Ustanove</span>
+                    </button>
+                </div>
+
+                <h3 style="margin-bottom: 16px;">Sljedeći termin</h3>
+                <div class="card" id="next-appointment-card">
+                    <div class="card-title" id="next-appointment-doctor">Dr. Mirsad Hadžić</div>
+                    <div class="card-subtitle" id="next-appointment-date">15.07.2026 - 10:00</div>
+                    <div class="card-content" id="next-appointment-facility">Dom zdravlja Centar</div>
+                    <span class="badge badge-primary mt-4" id="next-appointment-status">Zakazano</span>
+                </div>
+
+                <h3 style="margin-bottom: 16px;">Aktivne terapije</h3>
+                <div id="active-therapies-list"></div>
+
+                <h3 style="margin-bottom: 16px;">Novi nalazi</h3>
+                <div id="recent-results-list"></div>
+
+                <h3 style="margin-bottom: 16px;">Podsjetnici</h3>
+                <div id="reminders-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Appointments Screen -->
+        <div id="appointments-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Termini</h1>
+                <button class="header-back" onclick="showNewAppointmentModal()">+</button>
+            </div>
+            <div class="main-content">
+                <div class="form-group">
+                    <select class="form-select" id="appointment-filter" onchange="filterAppointments()">
+                        <option value="all">Svi termini</option>
+                        <option value="zakazano">Zakazano</option>
+                        <option value="završeno">Završeno</option>
+                        <option value="otkazano">Otkazano</option>
+                    </select>
+                </div>
+                <div id="appointments-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Prescriptions Screen -->
+        <div id="prescriptions-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Recepti</h1>
+            </div>
+            <div class="main-content">
+                <div class="form-group">
+                    <select class="form-select" id="prescription-filter" onchange="filterPrescriptions()">
+                        <option value="all">Svi recepti</option>
+                        <option value="aktivan">Aktivni</option>
+                        <option value="iskorišten">Iskorišteni</option>
+                        <option value="istekao">Istekli</option>
+                    </select>
+                </div>
+                <div id="prescriptions-list"></div>
+                
+                <h3 style="margin-top: 32px; margin-bottom: 16px;">Trenutne terapije</h3>
+                <div id="therapies-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Lab Results Screen -->
+        <div id="lab-results-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Laboratorijski nalazi</h1>
+                <button class="header-back" onclick="showUploadModal()">↑</button>
+            </div>
+            <div class="main-content">
+                <div class="form-group">
+                    <select class="form-select" id="lab-filter" onchange="filterLabResults()">
+                        <option value="all">Svi nalazi</option>
+                        <option value="krvna slika">Krvna slika</option>
+                        <option value="biohemija">Biohemija</option>
+                        <option value="šećer">Šećer</option>
+                        <option value="holesterol">Holesterol</option>
+                        <option value="urin">Urin</option>
+                    </select>
+                </div>
+                <div id="lab-results-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Medical Records Screen -->
+        <div id="records-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Medicinski karton</h1>
+            </div>
+            <div class="main-content">
+                <div class="form-group">
+                    <select class="form-select" id="record-filter" onchange="filterRecords()">
+                        <option value="all">Svi zapisi</option>
+                        <option value="dijagnoza">Dijagnoze</option>
+                        <option value="hronična bolest">Hronične bolesti</option>
+                        <option value="operacija">Operacije</option>
+                        <option value="vakcinacija">Vakcinacije</option>
+                        <option value="hospitalizacija">Hospitalizacije</option>
+                    </select>
+                </div>
+                <div id="records-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Profil</h1>
+            </div>
+            <div class="main-content">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profile-avatar-display">A</div>
+                    <div class="profile-info">
+                        <h2 id="profile-name-display">Amela Kovačević</h2>
+                        <p id="profile-jmbg-display">1234567890123</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Lični podaci</h3>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Datum rođenja</div>
+                            <div class="list-item-subtitle" id="profile-dob">15.05.1990</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Krvna grupa</div>
+                            <div class="list-item-subtitle" id="profile-blood">A+</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Broj osiguranja</div>
+                            <div class="list-item-subtitle" id="profile-insurance">KS123456</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Zdravstveni podaci</h3>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Alergije</div>
+                            <div class="list-item-subtitle" id="profile-allergies">Penicilin</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Hronične bolesti</div>
+                            <div class="list-item-subtitle" id="profile-chronic">Hipertenzija</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Izabrani doktor</div>
+                            <div class="list-item-subtitle" id="profile-doctor">Dr. Mirsad Hadžić</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Kontakt za hitne slučajeve</h3>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title" id="emergency-contact-name">Mehmed Kovačević</div>
+                            <div class="list-item-subtitle" id="emergency-contact-phone">+387 61 123 456</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary mb-4" onclick="showEditProfileModal()">Uredi profil</button>
+                <button class="btn btn-secondary mb-4" onclick="downloadKartonSummary()">Preuzmi sažetak kartona</button>
+                <button class="btn btn-danger" onclick="logout()">Odjavi se</button>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Health Tracking Screen -->
+        <div id="health-tracking-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Praćenje zdravlja</h1>
+            </div>
+            <div class="main-content">
+                <div class="grid grid-2 mb-4">
+                    <div class="health-stat">
+                        <div class="health-stat-value" id="bp-pressure">130/85</div>
+                        <div class="health-stat-label">Pritisak (mmHg)</div>
+                    </div>
+                    <div class="health-stat">
+                        <div class="health-stat-value" id="pulse-rate">72</div>
+                        <div class="health-stat-label">Puls (bpm)</div>
+                    </div>
+                    <div class="health-stat">
+                        <div class="health-stat-value" id="sugar-level">5.2</div>
+                        <div class="health-stat-label">Šećer (mmol/L)</div>
+                    </div>
+                    <div class="health-stat">
+                        <div class="health-stat-value" id="saturation">98</div>
+                        <div class="health-stat-label">Saturacija (%)</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary mb-4" onclick="showAddHealthLogModal()">Dodaj mjerenje</button>
+
+                <h3 style="margin-bottom: 16px;">Historija mjerenja</h3>
+                <div id="health-logs-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Reminders Screen -->
+        <div id="reminders-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Podsjetnici</h1>
+                <button class="header-back" onclick="showAddReminderModal()">+</button>
+            </div>
+            <div class="main-content">
+                <div id="reminders-full-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Refunds Screen -->
+        <div id="refunds-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Refundacije</h1>
+                <button class="header-back" onclick="showRefundModal()">+</button>
+            </div>
+            <div class="main-content">
+                <div id="refunds-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Healthcare Facilities Screen -->
+        <div id="facilities-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Zdravstvene ustanove</h1>
+            </div>
+            <div class="main-content">
+                <div class="form-group">
+                    <input type="text" class="form-input" id="facility-search" placeholder="Pretraži ustanove..." oninput="searchFacilities()">
+                </div>
+                <div class="form-group">
+                    <select class="form-select" id="facility-type-filter" onchange="filterFacilities()">
+                        <option value="all">Sve ustanove</option>
+                        <option value="dom zdravlja">Domovi zdravlja</option>
+                        <option value="bolnica">Bolnice</option>
+                        <option value="apoteka">Apoteke</option>
+                        <option value="dežurna ambulanta">Dežurne ambulante</option>
+                        <option value="laboratorija">Laboratorije</option>
+                    </select>
+                </div>
+                <div id="facilities-list"></div>
+            </div>
+            <div class="bottom-nav" id="bottom-nav"></div>
+        </div>
+
+        <!-- Emergency Screen -->
+        <div id="emergency-screen" class="page">
+            <div class="header">
+                <button class="header-back" onclick="showPage('home-screen')">←</button>
+                <h1 class="header-title">Hitni slučaj</h1>
+            </div>
+            <div class="main-content">
+                <button class="emergency-btn" onclick="callEmergency()">SOS</button>
+                <div class="text-center mb-4">
+                    <p style="color: var(--danger-color); font-weight: 600;">Pritisnite za hitni poziv</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Osnovni medicinski podaci</h3>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Krvna grupa</div>
+                            <div class="list-item-subtitle" id="emergency-blood">A+</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Alergije</div>
+                            <div class="list-item-subtitle" id="emergency-allergies">Penicilin</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">Hronične bolesti</div>
+                            <div class="list-item-subtitle" id="emergency-chronic">Hipertenzija</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Trenutne terapije</h3>
+                    <div id="emergency-therapies"></div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Hitni kontakti</h3>
+                    <div id="emergency-contacts-list"></div>
+                </div>
+
+                <button class="btn btn-primary mb-4" onclick="callEmergencyContact()">Pozovi kontakt</button>
+                <button class="btn btn-secondary" onclick="callAmbulance()">Pozovi hitnu pomoć (124)</button>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="modal-overlay" class="modal">
+            <div class="modal-content" id="modal-content"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
