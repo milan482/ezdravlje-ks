@@ -58,6 +58,19 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
+.quick-action-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
+}
+
+.header-back svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--primary-color);
+}
+
+
 /* Header */
 .header {
     position: sticky;
