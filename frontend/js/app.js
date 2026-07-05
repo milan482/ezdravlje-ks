@@ -123,18 +123,26 @@ function setupFormHandlers() {
 }
 
 // Bottom Navigation
+const navIcons = {
+    home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path><path d="M9 22V12h6v10"></path></svg>',
+    appointments: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg>',
+    prescriptions: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg>',
+    'lab-results': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L15 8.5V2"></path><path d="M9 2h6"></path><path d="M9 15h6"></path></svg>',
+    profile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg>'
+};
+
 function renderBottomNav() {
     const navItems = [
-        { id: 'home', icon: '🏠', label: 'Početna', screen: 'home-screen' },
-        { id: 'appointments', icon: '📅', label: 'Termini', screen: 'appointments-screen' },
-        { id: 'prescriptions', icon: '💊', label: 'Terapije', screen: 'prescriptions-screen' },
-        { id: 'lab-results', icon: '🔬', label: 'Nalazi', screen: 'lab-results-screen' },
-        { id: 'profile', icon: '👤', label: 'Profil', screen: 'profile-screen' }
+        { id: 'home', label: 'Početna', screen: 'home-screen' },
+        { id: 'appointments', label: 'Termini', screen: 'appointments-screen' },
+        { id: 'prescriptions', label: 'Terapije', screen: 'prescriptions-screen' },
+        { id: 'lab-results', label: 'Nalazi', screen: 'lab-results-screen' },
+        { id: 'profile', label: 'Profil', screen: 'profile-screen' }
     ];
     
     const navHtml = navItems.map(item => `
         <button class="nav-item" onclick="showPage('${item.screen}')" data-nav="${item.id}">
-            <span>${item.icon}</span>
+            ${navIcons[item.id]}
             <span>${item.label}</span>
         </button>
     `).join('');
