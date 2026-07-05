@@ -5,27 +5,43 @@ let currentPatientId = null;
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for existing session
-    const savedUser = localStorage.getItem('current_user');
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        currentProfile = currentUser.profile;
-        currentPatientId = currentProfile.id;
-        showPage('home-screen');
-        loadDashboard();
-    } else {
-        // Show splash screen then login
-        setTimeout(() => {
-            showPage('login-screen');
-        }, 2000);
-    }
-    
     // Setup form handlers
     setupFormHandlers();
-    
+
     // Render bottom navigation
     renderBottomNav();
+
+    // Splash screen now waits for a tap — see startApp()
 });
+
+// Fired when the user taps the splash screen
+function startApp() {
+    const splash = document.getElementById('splash-screen');
+    if (!splash || splash.dataset.dismissed === 'true') return; // prevent double-fire
+    splash.dataset.dismissed = 'true';
+
+    // small fade/scale-out for a smoother feel
+    splash.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    splash.style.opacity = '0';
+    splash.style.transform = 'scale(0.97)';
+
+    setTimeout(() => {
+        const savedUser = localStorage.getItem('current_user');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+            currentProfile = currentUser.profile;
+            currentPatientId = currentProfile.id;
+            showPage('home-screen');
+            loadDashboard();
+        } else {
+            showPage('login-screen');
+        }
+
+        // Remove splash entirely from the DOM so nothing can ever
+        // show it again — no way to "scroll back" to it
+        splash.remove();
+    }, 300);
+}
 
 // Page Navigation
 function showPage(pageId) {
